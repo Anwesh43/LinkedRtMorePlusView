@@ -189,4 +189,26 @@ class RtMorePlusView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : RtMorePlusView) {
+
+        private val rmp : RMPNode = RMPNode(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            rmp.draw(canvas, paint)
+            animator.animate {
+                rmp.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            rmp.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
