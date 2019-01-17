@@ -53,7 +53,10 @@ fun Canvas.drawRMPNode(i : Int, scale : Float, paint : Paint) {
     drawRect(RectF(-size/2, -size/2, size/2, size/2), paint)
     for (j in 0..(lines - 1)) {
         val sc : Float = sc1.divideScale(j, lines)
+        save()
+        rotate(90f * j)
         drawRTLine(size / 2, size/2, 45f * sc, paint)
+        restore()
     }
     restore()
 }
@@ -193,7 +196,7 @@ class RtMorePlusView(ctx : Context) : View(ctx) {
 
     data class Renderer(var view : RtMorePlusView) {
 
-        private val rmp : RMPNode = RMPNode(0)
+        private val rmp : RtMorePlus = RtMorePlus(0)
         private val animator : Animator = Animator(view)
 
         fun render(canvas : Canvas, paint : Paint) {
