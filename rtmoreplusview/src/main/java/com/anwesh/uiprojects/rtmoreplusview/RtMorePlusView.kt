@@ -212,4 +212,13 @@ class RtMorePlusView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : RtMorePlusView {
+            val view : RtMorePlusView = RtMorePlusView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
